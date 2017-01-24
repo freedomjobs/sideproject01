@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+	itemscope 
+	itemtype="http://schema.org/Article" 
+	prefix="og: http://ogp.me/ns#" >
+
+<head>
+<meta charset="UTF-8" />
+<title>Tutorial simples: Como usar o git e o github</title>
+<!-- Jetpack Site Verification Tags -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content="Stargazer 3.0.0" />
+
+<!-- All in One SEO Pack 2.3.11 by Michael Torbert of Semper Fi Web Design[157,225] -->
+<link rel="author" href="https://plus.google.com/102238264098823309485?rel=author" />
+<meta name="description"  content="Como usar o github em poucos minutos" />
+
+<meta name="keywords"  content="git,github,commit,ssh public keys,linux" />
+
+<link rel="canonical" href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" />
+<meta property="og:title" content="Tutorial simples: Como usar o git e o github" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" />
+<meta property="og:image" content="http://graph.facebook.com/francisco.kahil/picture?type=large" />
+<meta property="og:site_name" content="codexico" />
+<meta property="og:description" content="Como usar o github em poucos minutos" />
+<meta property="article:published_time" content="2010-03-11T15:00:08Z" />
+<meta property="article:modified_time" content="2010-11-16T00:10:54Z" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@codexico" />
+<meta name="twitter:domain" content="codexico.com.br" />
+<meta name="twitter:title" content="Tutorial simples: Como usar o git e o github" />
+<meta name="twitter:description" content="Como usar o github em poucos minutos" />
+<meta name="twitter:image" content="http://graph.facebook.com/francisco.kahil/picture?type=large" />
+<meta itemprop="image" content="http://graph.facebook.com/francisco.kahil/picture?type=large" />
+			<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-18373314-1', { 'cookieDomain': 'codexico.com.br' } );
+			
+			ga('send', 'pageview');
+			</script>
+<!-- /all in one seo pack -->
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.gravatar.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Feed para codexico &raquo;" href="http://codexico.com.br/blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para codexico &raquo;" href="http://codexico.com.br/blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para codexico &raquo; Tutorial simples: Como usar o git e o github" href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/feed/" />
+<link rel="pingback" href="http://codexico.com.br/blog/xmlrpc.php" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/codexico.com.br\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.2"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">.codecolorer-container table{
+margin-bottom: 0px !important;
+}</style>
+<link rel='stylesheet' id='stargazer-fonts-css'  href='//fonts.googleapis.com/css?family=Droid+Serif%3A400%2C700%2C400italic%2C700italic%7COpen+Sans%3A300%2C400%2C600%2C700&#038;ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hybrid-one-five-css'  href='http://codexico.com.br/blog/wp-content/themes/stargazer/library/css/one-five.min.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hybrid-gallery-css'  href='http://codexico.com.br/blog/wp-content/themes/stargazer/library/css/gallery.min.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='stargazer-mediaelement-css'  href='http://codexico.com.br/blog/wp-content/themes/stargazer/css/mediaelement.min.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='stargazer-media-css'  href='http://codexico.com.br/blog/wp-content/themes/stargazer/css/media.min.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hybrid-parent-css'  href='http://codexico.com.br/blog/wp-content/themes/stargazer/style.min.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hybrid-style-css'  href='http://codexico.com.br/blog/wp-content/themes/polymer/style.css?ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='googleFonts-css'  href='//fonts.googleapis.com/css?family=Roboto+Condensed%3A400%2C300%2C700%2C400italic&#038;ver=4.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='http://codexico.com.br/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://codexico.com.br/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=4.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='codecolorer-css'  href='http://codexico.com.br/blog/wp-content/plugins/codecolorer/codecolorer.css?ver=0.9.9' type='text/css' media='screen' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+window.CKEDITOR_BASEPATH = "http://codexico.com.br/blog/wp-content/plugins/ckeditor-for-wordpress/ckeditor/";
+var ckeditorSettings = { "textarea_id": "comment", "pluginPath": "http:\/\/codexico.com.br\/blog\/wp-content\/plugins\/ckeditor-for-wordpress\/", "autostart": true, "excerpt_state": false, "qtransEnabled": false, "outputFormat": { "indent": false, "breakBeforeOpen": false, "breakAfterOpen": false, "breakBeforeClose": false, "breakAfterClose": false }, "configuration": { "height": "120px", "skin": "kama", "scayt_autoStartup": false, "entities": true, "entities_greek": true, "entities_latin": true, "toolbar": "WordpressFull", "templates_files": [ "http:\/\/codexico.com.br\/blog\/wp-content\/plugins\/ckeditor-for-wordpress\/ckeditor.templates.js" ], "stylesCombo_stylesSet": "wordpress:http:\/\/codexico.com.br\/blog\/wp-content\/plugins\/ckeditor-for-wordpress\/ckeditor.styles.js", "allowedContent": true, "customConfig": "http:\/\/codexico.com.br\/blog\/wp-content\/plugins\/ckeditor-for-wordpress\/ckeditor.config.js" }, "externalPlugins": [  ], "additionalButtons": [  ] }
+/* ]]> */
+</script><style type="text/css">
+			#content table.cke_editor { margin:0; }
+			#content table.cke_editor tr td { padding:0;border:0; }
+		</style><script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/ckeditor-for-wordpress/ckeditor/ckeditor.js?t=F7J8&#038;ver=4.5.3.3'></script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/ckeditor-for-wordpress/includes/ckeditor.utils.js?t=F7J8&#038;ver=4.5.3.3'></script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/ckeditor-for-wordpress/includes/ckeditor.comment-reply.js?ver=20100901'></script>
+<link rel='https://api.w.org/' href='http://codexico.com.br/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://codexico.com.br/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://codexico.com.br/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='apt-get install todos os compactadores e descompactadores no linux' href='http://codexico.com.br/blog/linux/apt-get-install-todos-os-compactadores-e-descompactadores-no-linux/' />
+<link rel='next' title='Como scannear e editar imagem no kubuntu 10.04' href='http://codexico.com.br/blog/linux/como-scannear-e-editar-imagem-no-kubuntu-10-04/' />
+<meta name="generator" content="WordPress 4.6.2" />
+<link rel='shortlink' href='http://wp.me/p13eof-y' />
+<link rel="alternate" type="application/json+oembed" href="http://codexico.com.br/blog/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fcodexico.com.br%2Fblog%2Flinux%2Ftutorial-simples-como-usar-o-git-e-o-github%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://codexico.com.br/blog/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fcodexico.com.br%2Fblog%2Flinux%2Ftutorial-simples-como-usar-o-git-e-o-github%2F&#038;format=xml" />
+<meta name="google-site-verification" content="vAmxbUrKADcWg0D4INPIqJHjFYBAKJyNuTvCX26dkc0" />
+<link rel='dns-prefetch' href='//v0.wordpress.com'>
+<link rel='dns-prefetch' href='//i0.wp.com'>
+<link rel='dns-prefetch' href='//i1.wp.com'>
+<link rel='dns-prefetch' href='//i2.wp.com'>
+
+<style type="text/css" id="custom-colors-css-2">#menu-primary,            #menu-primary .search-form > div,            #footer,            .audio-shortcode-wrap,            .media-shortcode-extend .media-info,            .media-info-toggle,            .entry-content .media-info-toggle,            .media-info-toggle:hover,            .media-info-toggle:focus,            .wp-audio-shortcode.mejs-container,            .mejs-controls,            .mejs-volume-button .mejs-volume-slider,            .mejs-overlay-play .mejs-overlay-button:after,            .mejs-time-rail .mejs-time-float,            .wp-playlist-dark,            #menu-primary li li a,            #menu-secondary li li a,            #menu-primary li li a:hover,          #menu-secondary li li a:hover,            #menu-primary ul ul li a:hover,            #menu-secondary ul ul li a:hover,            #menu-primary ul ul li a:focus,            #menu-secondary ul ul li a:focus             {            background-color: #349F8C;            } .entry a,            .widget a{            color: #349F8C;            } #menu-primary li li a,          #menu-secondary li li a {          border-top-color: #349F8C;          }@media screen and (max-width: 799px) {                #menu-primary li a,                #menu-secondary li a,                #menu-secondary .menu-toggle button {                  border-color: #349F8C;                  background-color: #349F8C;                  color: #fff;                }                #menu-primary li.current-menu-item > a,              #menu-secondary li.current-menu-item > a {                  background-color: #349F8C;                } }@media only screen and (min-width: 800px) {                #menu-secondary li a{                  color: #349F8C;                }                #menu-primary li li a,                #menu-secondary li li a,                #menu-primary .search-form > div{                  background-color: #349F8C;                }                .menu li > ul::before {              border-bottom-color: #349F8C;              }              .ltr .menu li li > ul::before {              border-right-color: #349F8C;              }              .rtl .menu li li > ul::before {              border-left-color: #349F8C;              } }</style>
+
+<style type="text/css" id="custom-colors-css">a, .wp-playlist-light .wp-playlist-playing, .wp-embed-comments a,.wp-embed-share-dialog-open, .wp-embed a { color: rgba( 52, 159, 140, 0.75 ); } a:hover, a:focus, legend, mark, .comment-respond .required, pre,.form-allowed-tags code, pre code,.wp-playlist-light .wp-playlist-item:hover,.wp-playlist-light .wp-playlist-item:focus,.mejs-button button:hover::after, .mejs-button button:focus::after,.mejs-overlay-button:hover::after, .mejs-overlay-button:focus::after,.wp-embed-comments a:hover, .wp-embed-comments a:focus,.wp-embed-share-dialog-open:hover, .wp-embed-share-dialog-open:focus,.wp-embed a:hover, .wp-embed a:focus{ color: #349F8C; } input[type='submit'], input[type='reset'], input[type='button'], button, .page-links a,.comment-reply-link, .comment-reply-login, .wp-calendar td.has-posts a, #menu-sub-terms li a{ background-color: rgba( 52, 159, 140, 0.8 ); } legend, mark, pre, .form-allowed-tags code { background-color: rgba( 52, 159, 140, 0.1 ); } input[type='submit']:hover, input[type='submit']:focus,input[type='reset']:hover, input[type='reset']:focus,input[type='button']:hover, input[type='button']:focus,button:hover, button:focus,.page-links a:hover, .page-links a:focus,.wp-calendar td.has-posts a:hover, .wp-calendar td.has-posts a:focus,.widget-title > .wrap,#comments-number > .wrap, #reply-title > .wrap, .attachment-meta-title > .wrap,.widget_search > .search-form,#menu-sub-terms li a:hover, #menu-sub-terms li a:focus,.comment-reply-link:hover, .comment-reply-link:focus,.comment-reply-login:hover, .comment-reply-login:focus,.mejs-time-rail .mejs-time-loaded, .skip-link .screen-reader-text{ background-color: #349F8C; } ::selection { background-color: #349F8C; } legend { border-color: rgba( 52, 159, 140, 0.15 ); } body { border-top-color: #349F8C; } .entry-content a, .entry-summary a, .comment-content a { border-bottom-color: rgba( 52, 159, 140, 0.15 ); } .entry-content a:hover, .entry-content a:focus,           .entry-summary a:hover, .entry-summary a:focus,           .comment-content a:hover, .comment-content a:focus           { border-bottom-color: rgba( 52, 159, 140, 0.75 ); } body, .widget-title, #comments-number, #reply-title,.attachment-meta-title { border-bottom-color: #349F8C; } blockquote { background-color: rgba( 52, 159, 140, 0.85 ); } blockquote blockquote { background-color: rgba( 52, 159, 140, 0.9 ); } blockquote { outline-color: rgba( 52, 159, 140, 0.85); }</style>
+
+<style type="text/css" id="custom-header-css">body.custom-header #site-title a { color: #5f6d80; }</style>
+<style type="text/css" id="custom-background-css">body.custom-background { background: #eeeeee; }</style>
+<meta data-pso-pv="1.2.1" data-pso-pt="singlePost" data-pso-th="4168fad231cfca5a703b14775390c821"></head>
+
+<body class="wordpress ltr pt pt-br child-theme y2017 m01 d24 h14 tuesday logged-out custom-background custom-header display-header-text singular singular-post singular-post-34 post-format-standard layout-1c custom-colors" dir="ltr" itemscope="itemscope" itemtype="http://schema.org/Blog">
+
+	<div id="container">
+
+		<div class="skip-link">
+			<a href="#content" class="screen-reader-text">Pular para conteúdo</a>
+		</div><!-- .skip-link -->
+
+		
+		<div class="wrap">
+
+			<header id="header" class="site-header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+
+				
+					<div id="branding">
+						
+													<h1 id="site-title" class="site-title" itemprop="headline"><a href="http://codexico.com.br/blog" rel="home">codexico</a></h1>							<h2 id="site-description" class="site-description" itemprop="description">Desenvolvimento web</h2>											</div><!-- #branding -->
+
+				
+				
+			</header><!-- #header -->
+
+			
+			<div id="main" class="main">
+
+				
+	<nav role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="3" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="http://codexico.com.br/blog" rel="home"><span itemprop="name">Início</span></a><meta itemprop="position" content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item"><a href="http://codexico.com.br/blog/category/linux/"><span itemprop="name">linux</span></a><meta itemprop="position" content="2" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="name">Tutorial simples: Como usar o git e o github</span><meta itemprop="position" content="3" /></li></ul></nav>
+
+<main id="content" class="content" role="main">
+
+	
+	
+		
+			
+			<article id="post-34" class="entry author-codexico has-excerpt post-34 post type-post status-publish format-standard category-git category-linux tag-git tag-github" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+
+	
+		<header class="entry-header">
+
+			<h1 class="entry-title" itemprop="headline">Tutorial simples: Como usar o git e o github</h1>
+
+			<div class="entry-byline">
+				<span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><a href="http://codexico.com.br/blog/author/codexico/" title="Posts de codexico" rel="author" class="url fn n" itemprop="url"><span itemprop="name">codexico</span></a></span>
+				<time class="entry-published updated" datetime="2010-03-11T15:00:08-02:00" itemprop="datePublished" title="quinta-feira, março 11, 2010, 3:00 pm">11 de março de 2010</time>
+				<a href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/#comments" class="comments-link" itemprop="discussionURL"><span class="dsq-postid" data-dsqidentifier="34 http://codexico.com.br/blog/?p=34">54</span></a>											</div><!-- .entry-byline -->
+
+		</header><!-- .entry-header -->
+
+		<div class="entry-content" itemprop="articleBody">
+			<p>Ultimamente estou envolvido em v&aacute;rios projetos ao mesmo tempo com v&aacute;rias equipes diferentes, ent&atilde;o controle de vers&atilde;o &eacute; essencial.</p>
+<p>Segue um manualzinho b&aacute;sico para iniciar com o git, espero atualizar e complementar este passo-a-passo com mais exemplos logo.</p>
+<p>O git serve para versionamento local, voc&ecirc; pode compartilhar de algumas maneiras, a mais f&aacute;cil &eacute; com servi&ccedil;os online. Neste exemplo vou usar o <a href="http://github.com" target="_blank" title="github - Social Coding">github</a>, testei tamb&eacute;m o <a href="http://projectlocker.com/" target="_blank" title="Project Locker">projectlocker</a>, que d&aacute; reposit&oacute;rios private gr&aacute;tis,&nbsp; mas n&atilde;o gostei. Outro que parece legal é o  <a href="http://codaset.com/" target="_blank" title="Codaset">Codaset</a>, ainda não testei.</p>
+<h3>1) Instalar git</h3>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ sudo apt-get install git-core</div></td></tr></tbody></table></div>
+</p>
+<p>&Eacute; necess&aacute;rio gerar uma chave ssh e fazer um cadastro em algum reposit&oacute;rio git. ( Esta etapa n&atilde;o &eacute; exatamente sobre o git, mas sobre a seguran&ccedil;a dos reposit&oacute;rios. )</p>
+<p>Confira se vc j&aacute; tem alguma chave com um &quot;ls ~/.ssh/&quot;, se j&aacute; existir uma voc&ecirc; pode utiliz&aacute;-la ou gerar uma nova:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">ssh-keygen -t rsa -C &quot;comment&quot;</div></td></tr></tbody></table></div>
+</p>
+<p>&quot;comment&quot; &eacute; s&oacute; um lembrete para saber do que se trata a chave, normalmente usa-se o seu nome de usu&aacute;rio do servi&ccedil;o que vai usar, por exemplo o github.</p>
+<p>Falando nisso, est&aacute; na hora de criar um usu&aacute;rio l&aacute; (http://github.com), vai lá que eu espero&#8230;</p>
+<p>Depois de logado v&aacute; para <a href="https://github.com/account">https://github.com/account</a> e clique em &quot;SSH Public Keys&quot; e &quot;add another public key&quot;. A c&oacute;pia da chave precisa ser exata(eu ia escrever que &#39;precisa ser precisa&#39; mas &eacute; feio n&eacute;), ent&atilde;o pode-se fazer assim:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br /></div></td><td><div class="text codecolorer">sudo apt-get install xclip<br />
+cat ~/.ssh/id_rsa.pub | xclip -sel clip</div></td></tr></tbody></table></div>
+</p>
+<p>A&iacute; &eacute; s&oacute; colar com um Ctrl+V normal. Agora j&aacute; d&aacute; para se comunicar com o github:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">ssh git@github.com</div></td></tr></tbody></table></div>
+</p>
+<p>Vai aparecer &quot;ERROR: Hi codexico! You&#39;ve successfully authenticated, but GitHub does not provide shell access&quot;, n&atilde;o se assuste com o ERROR, o que interessa &eacute; que o github te reconheceu. Qualquer duvida tem o help do github: <a href="http://help.github.com/linux-key-setup/" target="_blank" title="Generating SSH keys (Linux)">Generating SSH keys (Linux).</a></p>
+<p>Por padr&atilde;o o git vai pegar o usu&aacute;rio do sistema, para que seu nome de usu&aacute;rio do github apare&ccedil;a corretamente use os comandos:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br /></div></td><td><div class="text codecolorer">git config --global user.name &quot;Your Name&quot;<br />
+git config --global user.email codexico@gmail.com</div></td></tr></tbody></table></div>
+</p>
+<h3>2) Criar Projeto no github</h3>
+<p>1) Podemos criar um novo projeto ou usar um existente. Para criar um novo v&aacute; at&eacute; o github e no alto da p&aacute;gina clique em &quot;Dashboard&quot; e depois em &quot;New Repository&quot;.</p>
+<p>Crie um espaço para o projeto no comnputador:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br /></div></td><td><div class="text codecolorer">$ mkdir nomedoprojeto<br />
+$ cd nomedodiretorio</div></td></tr></tbody></table></div>
+</p>
+<p>2) Iniciar um git neste diret&oacute;rio:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git init</div></td></tr></tbody></table></div>
+</p>
+<p>Sa&iacute;da do comando:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">Initialized empty Git repository in /nomedodiretorio/.git/</div></td></tr></tbody></table></div>
+</p>
+<p>Deve aparecer um diretorio oculto <strong>.git</strong>, neste <strong>.git</strong> ficam as configura&ccedil;&otilde;es que ser&atilde;o usadas para este projeto.</p>
+<p>Por exemplo:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer">$ ls .git<br />
+branches config description FETCH_HEAD HEAD hooks index info logs<br />
+objects refs</div></td></tr></tbody></table></div>
+</p>
+<p>3) Adicionar o reposit&oacute;rio, neste exemplo vou usar um que criei para este tutorial, pode ser também o repositório criado no passo 1, o endereço fica na página do projeto (neste caso https://github.com/codexico/tutorial-github):</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git remote add origin git@github.com:codexico/tutorial-github.git</div></td></tr></tbody></table></div>
+</p>
+<p>Formato do comando:</p>
+<p>&quot;git remote add&quot; adiciona um reposit&oacute;rio ao git que foi iniciado neste diret&oacute;rio, &quot;origin&quot; &eacute; o apelido para o projeto, &quot;git@github.com:codexico/tutorial-github.git&quot; &eacute; o endere&ccedil;o do projeto.</p>
+<p>Resultado:(apareceu a parte <em>[remote &quot;origin&quot;]</em>)</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer">$ cat .git/config<br />
+&nbsp; [core]<br />
+&nbsp; repositoryformatversion = 0<br />
+&nbsp; filemode = true<br />
+&nbsp; bare = false<br />
+&nbsp; logallrefupdates = true<br />
+&nbsp; [remote &quot;origin&quot;]<br />
+&nbsp; url = git@github.com:codexico/tutorial-github.git<br />
+&nbsp; fetch = +refs/heads/*:refs/remotes/origin/*</div></td></tr></tbody></table></div>
+</p>
+<p>4) Baixar(pull=puxar) o projeto:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git pull origin master</div></td></tr></tbody></table></div>
+</p>
+<p>Formato do comando:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">git pull apelidoDaOrigem apelidoParaDestino</div></td></tr></tbody></table></div>
+</p>
+<p>Sa&iacute;da do comando:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer">remote: Counting objects: 52278, done.<br />
+&nbsp; remote: Compressing objects: 100% (10917/10917), done.<br />
+&nbsp; remote: Total 52278 (delta 40975), reused 51715 (delta 40669)<br />
+&nbsp; Receiving objects: 100% (52278/52278), 8.33 MiB | 189 KiB/s, done.<br />
+&nbsp; Resolving deltas: 100% (40975/40975), done.<br />
+&nbsp; From git@github.com:codexico/tutorial-github.git<br />
+&nbsp; * branch &nbsp;master -&gt; FETCH_HEAD</div></td></tr></tbody></table></div>
+</p>
+<h3>3) Usar o git</h3>
+<p>Exemplo (escolha um nome diferente para o arquivo teste):</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ touch testegit</div></td></tr></tbody></table></div>
+</p>
+<p>1) Adicionar as altera&ccedil;&otilde;es:</p>
+<p>&#8211; Podemos adicionar somente uma altera&ccedil;&atilde;o:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git add testegit</div></td></tr></tbody></table></div>
+</p>
+<p>&#8211; Ou adicionar todas as altera&ccedil;&otilde;es:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git add .</div></td></tr></tbody></table></div>
+</p>
+<p>Neste passo as altera&ccedil;&otilde;es ainda n&atilde;o est&atilde;o sob o controle de vers&atilde;o, elas somente foram adicionadas para quando der um commit.</p>
+<p>2) Comitar as altera&ccedil;&otilde;es:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git commit -m &quot;mensagem teste para o tutorial&quot;</div></td></tr></tbody></table></div>
+</p>
+<p>&Eacute; obrigat&oacute;rio acrescentar uma mensagem.</p>
+<p>Sa&iacute;da do comando:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer">[master de2f5ce] teste para o tutorial<br />
+&nbsp; 1 files changed, 1 insertions(+), 0 deletions(-)<br />
+&nbsp; create mode 100644 testegit</div></td></tr></tbody></table></div>
+</p>
+<p>Agora as altera&ccedil;&otilde;es foram adicionadas ao controle de vers&atilde;o. Mas ainda est&atilde;o somente na m&aacute;quina local.</p>
+<p>3) Enviar(push=empurrar) as altera&ccedil;&otilde;es:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git push origin master</div></td></tr></tbody></table></div>
+</p>
+<p>Sa&iacute;da do comando:</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer">Counting objects: 4, done.<br />
+&nbsp; Delta compression using up to 2 threads.<br />
+&nbsp; Compressing objects: 100% (2/2), done.<br />
+&nbsp; Writing objects: 100% (3/3), 288 bytes, done.<br />
+&nbsp; Total 3 (delta 1), reused 0 (delta 0)<br />
+&nbsp; To git@github.com:codexico/tutorial-github.git<br />
+&nbsp; 3be4c21..de2f5ce&amp;nbsp; master -&gt; master</div></td></tr></tbody></table></div>
+</p>
+<p>Se durante o tempo em que fez o pull e o push outra pessoa que tamb&eacute;m participe do projeto fez altera&ccedil;&otilde;es o push ser&aacute; rejeitado. Ent&atilde;o &eacute; necess&aacute;rio atualizar o projeto local antes de enviar novas altera&ccedil;&otilde;es.</p>
+<p><div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">$ git fetch origin</div></td></tr></tbody></table></div>
+</p>
+<p>Atualizar antes de enviar &eacute; uma boa pr&aacute;tica a ser seguida para quem usa svn ou cvs e &eacute; obrigat&oacute;ria no git.</p>
+<p>4)Pronto, confira as altera&ccedil;&otilde;es no navegador acessando o endere&ccedil;o do projeto (http://github.com/codexico/tutorial-github neste exemplo).</p>
+<p>Dica final: para que n&atilde;o precise digitar sempre a senha do ssh siga os passos desse link: http://help.github.com/working-with-key-passphrases/</p>
+<p>Atualizado em 09/09/2010, mudei o reposit&oacute;rio e adicionei instru&ccedil;&otilde;es para gerar a chave ssh.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-official sd-sharing"><div class="sd-content"><ul><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button" href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/?share=email" target="_blank" title="Clique para enviar por email a um amigo"><span>Email</span></a></li><li class="share-facebook"><div class="fb-share-button" data-href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" data-layout="button_count"></div></li><li class="share-twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" data-text="Tutorial simples: Como usar o git e o github" data-via="codexico" >Tweet</a></li><li class="share-google-plus-1"><div class="googleplus1_button"><div class="g-plus" data-action="share" data-annotation="bubble" data-href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/"></div></div></li><li class="share-linkedin"><div class="linkedin_button"><script type="in/share" data-url="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" data-counter="right"></script></div></li><li class="share-reddit"><div class="reddit_button"><iframe src="http://www.reddit.com/static/button/button1.html?newwindow=true&width=120&amp;url=http%3A%2F%2Fcodexico.com.br%2Fblog%2Flinux%2Ftutorial-simples-como-usar-o-git-e-o-github%2F&amp;title=Tutorial%20simples%3A%20Como%20usar%20o%20git%20e%20o%20github" height="22" width="120" scrolling="no" frameborder="0"></iframe></div></li><li class="share-end"></li></ul></div></div></div>					</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+			<span class="entry-terms category" itemprop="articleSection">Publicado em <a href="http://codexico.com.br/blog/category/git/" rel="tag">git</a>, <a href="http://codexico.com.br/blog/category/linux/" rel="tag">linux</a></span>			<br /><span class="entry-terms post_tag" itemprop="keywords">Marcação <a href="http://codexico.com.br/blog/tag/git/" rel="tag">git</a>, <a href="http://codexico.com.br/blog/tag/github/" rel="tag">github</a></span>		</footer><!-- .entry-footer -->
+
+	
+</article><!-- .entry -->
+			
+				
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-3">
+        <div id="dsq-comment-header-3" class="dsq-comment-header">
+            <cite id="dsq-cite-3">
+                <a id="dsq-author-user-3" href="http://www.shigotodoko.com" target="_blank" rel="nofollow">Kleber Shimabuku</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3" class="dsq-comment-body">
+            <div id="dsq-comment-message-3" class="dsq-comment-message"><p>Muito bacana o tutorial! valeu! :-)</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6">
+        <div id="dsq-comment-header-6" class="dsq-comment-header">
+            <cite id="dsq-cite-6">
+                <span id="dsq-author-user-6">Kleber Correia</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6" class="dsq-comment-body">
+            <div id="dsq-comment-message-6" class="dsq-comment-message"><p>Parabéns pela iniciativa! Mto bom tuto!!!</p>
+<p>Vale lembrar: é necessário criar a chave rsa&#8230; id_rsa e id_rsa.pub&#8230;.<br />
+<a href="http://help.github.com/msysgit-key-setup/" rel="nofollow">http://help.github.com/msysgit-key-setup/</a></p>
+<p>Abraços!!!</p>
+<p>;)</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-codexico bypostauthor even thread-even depth-1 role-editor" id="dsq-comment-7">
+        <div id="dsq-comment-header-7" class="dsq-comment-header">
+            <cite id="dsq-cite-7">
+                <a id="dsq-author-user-7" href="http://codexico.com.br" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7" class="dsq-comment-body">
+            <div id="dsq-comment-message-7" class="dsq-comment-message"><p>Hehehe, 2 comentários de 2 Kleber.</p>
+<p>@Kleber1 &#8211; estamos aí pra isso, qq coisa é só chamar!</p>
+<p>@Kleber2 &#8211; valeu, eu fiz o tutorial só para o linux né, vários já me pediram para colocar as instruções para windows também, estou pensando se atualizo este ou faço um outro post, o lance é que raramente uso windows, então vou ter q aprender e testar as ferramentas antes para poder escrever, me ajuda?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8">
+        <div id="dsq-comment-header-8" class="dsq-comment-header">
+            <cite id="dsq-cite-8">
+                <span id="dsq-author-user-8">Kleber Correia</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8" class="dsq-comment-body">
+            <div id="dsq-comment-message-8" class="dsq-comment-message"><p>Então cara e só uso linux tb! Ubuntu 10.04&#8230; não meu caso foi necessário gerar a chave&#8230;.<br />
+Da uma olhada:</p>
+<p><a href="http://help.github.com/linux-git-installation/" rel="nofollow">http://help.github.com/linux-git-installation/</a></p>
+<p><a href="http://help.github.com/linux-key-setup/" rel="nofollow">http://help.github.com/linux-key-setup/</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-23">
+        <div id="dsq-comment-header-23" class="dsq-comment-header">
+            <cite id="dsq-cite-23">
+                <span id="dsq-author-user-23">marco antonio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-23" class="dsq-comment-body">
+            <div id="dsq-comment-message-23" class="dsq-comment-message"><p>Ol&aacute;, parab&eacute;ns pelo tutorial.<br />
+Uma sugest&atilde;o: faltou dizer como se faz para recuperar um commit.<br />
+Abra&ccedil;o!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-26">
+        <div id="dsq-comment-header-26" class="dsq-comment-header">
+            <cite id="dsq-cite-26">
+                <span id="dsq-author-user-26">Anônimo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26" class="dsq-comment-body">
+            <div id="dsq-comment-message-26" class="dsq-comment-message"><p>Para recuperar modificações há algumas possibilidades:1) O arquivo foi modificado mas ainda não foi dado commit:</p>
+<div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">git checkout -- arquivomodificado</div></td></tr></tbody></table></div>
+<p>2) O arquivo foi modificado e foi dado commit:</p>
+<div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">git log --pretty=oneline</div></td></tr></tbody></table></div>
+<p>Identifique o SHA do commit que deseja que seja o atual e substitua no comando:</p>
+<div class="codecolorer-container text twitlight" style="overflow:auto;white-space:nowrap;width:570px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br /></div></td><td><div class="text codecolorer">git reset --hard b8551c9354ee071349f104e3867e57ea7b220c69</div></td></tr></tbody></table></div>
+<p>O problema é que pode ser que vc queira de novo as modificações e é difícil recuperar (git reflog, git log -g ), a melhor maneira é criar um branch para o código com as modificações e só depois excluir os commits no branch priincipal.Vou mostrar como funcionam branchs e merges na parte 2 do tutorial.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-36">
+        <div id="dsq-comment-header-36" class="dsq-comment-header">
+            <cite id="dsq-cite-36">
+                <a id="dsq-author-user-36" href="http://www.agnhesi.com" target="_blank" rel="nofollow">Andressa Agnhesi</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36" class="dsq-comment-body">
+            <div id="dsq-comment-message-36" class="dsq-comment-message"><p>Muito bom o post!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-37">
+        <div id="dsq-comment-header-37" class="dsq-comment-header">
+            <cite id="dsq-cite-37">
+                <span id="dsq-author-user-37">Nataliel Vasconcelos</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-37" class="dsq-comment-body">
+            <div id="dsq-comment-message-37" class="dsq-comment-message"><p>Otimo post! parabens</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-47">
+        <div id="dsq-comment-header-47" class="dsq-comment-header">
+            <cite id="dsq-cite-47">
+                <span id="dsq-author-user-47">Filipe Acácio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-47" class="dsq-comment-body">
+            <div id="dsq-comment-message-47" class="dsq-comment-message"><p>Ótimo post! Parabéns!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-49">
+        <div id="dsq-comment-header-49" class="dsq-comment-header">
+            <cite id="dsq-cite-49">
+                <span id="dsq-author-user-49">Régis</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-49" class="dsq-comment-body">
+            <div id="dsq-comment-message-49" class="dsq-comment-message"><p>Codexico, como você configura esses códigos pra ficar numerado com fundo preto no blog? Eu li o código fonte da página mas não consegui.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-55">
+        <div id="dsq-comment-header-55" class="dsq-comment-header">
+            <cite id="dsq-cite-55">
+                <span id="dsq-author-user-55">Anônimo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-55" class="dsq-comment-body">
+            <div id="dsq-comment-message-55" class="dsq-comment-message"><p>Eu uso o plugin CodeColorer: <a href="http://kpumuk.info/projects/wordpress-plugins/codecolorer/" rel="nofollow">http://kpumuk.info/projects/wordpress-plugins/codecolorer/</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-50">
+        <div id="dsq-comment-header-50" class="dsq-comment-header">
+            <cite id="dsq-cite-50">
+                <a id="dsq-author-user-50" href="http://www.facebook.com/people/Thiago-Marques/100001167338948" target="_blank" rel="nofollow">Thiago Marques</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-50" class="dsq-comment-body">
+            <div id="dsq-comment-message-50" class="dsq-comment-message"><p>Muito simples e útil seu tutorial. valeo!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-51">
+        <div id="dsq-comment-header-51" class="dsq-comment-header">
+            <cite id="dsq-cite-51">
+                <a id="dsq-author-user-51" href="http://www.facebook.com/people/Thiago-Marques/100001167338948" target="_blank" rel="nofollow">Thiago Marques</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-51" class="dsq-comment-body">
+            <div id="dsq-comment-message-51" class="dsq-comment-message"><p>Muito simples e útil seu tutorial. valeo!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-52">
+        <div id="dsq-comment-header-52" class="dsq-comment-header">
+            <cite id="dsq-cite-52">
+                <a id="dsq-author-user-52" href="http://www.facebook.com/people/Thiago-Marques/100001167338948" target="_blank" rel="nofollow">Thiago Marques</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-52" class="dsq-comment-body">
+            <div id="dsq-comment-message-52" class="dsq-comment-message"><p>Muito simples e útil seu tutorial. valeo!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-56">
+        <div id="dsq-comment-header-56" class="dsq-comment-header">
+            <cite id="dsq-cite-56">
+                <a id="dsq-author-user-56" href="http://parecetamarindo.blogspot.com/" target="_blank" rel="nofollow">Cássio Nandi Citadin</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-56" class="dsq-comment-body">
+            <div id="dsq-comment-message-56" class="dsq-comment-message"><p>Curti o tutorial codexico. Nas várias leituras que fiz essa semana sobre o assunto, foi esse post que abriu minha mente. Esse conceito de gerenciamento local eu nunca tinha me tocado.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-59">
+        <div id="dsq-comment-header-59" class="dsq-comment-header">
+            <cite id="dsq-cite-59">
+                <span id="dsq-author-user-59">Guilherme Souza</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-59" class="dsq-comment-body">
+            <div id="dsq-comment-message-59" class="dsq-comment-message"><p>Aprendi com este tutorial e já estou fazendo uso do conhecimento adquirido. Muito bacana a iniciativa. Foi muito bem detalhado e de fácil aprendizado. Parabéns!!!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-64">
+        <div id="dsq-comment-header-64" class="dsq-comment-header">
+            <cite id="dsq-cite-64">
+                <span id="dsq-author-user-64">Quelzita2008</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-64" class="dsq-comment-body">
+            <div id="dsq-comment-message-64" class="dsq-comment-message"><p>muito bom o post!! gostei e ja divulguei para alguns amigos!! </p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-67">
+        <div id="dsq-comment-header-67" class="dsq-comment-header">
+            <cite id="dsq-cite-67">
+                <a id="dsq-author-user-67" href="http://www.facebook.com/leandrogomess" target="_blank" rel="nofollow">Leandro Gomes da Silva</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-67" class="dsq-comment-body">
+            <div id="dsq-comment-message-67" class="dsq-comment-message"><p>Olá,, já possuía um projeto no Git mas tive que formatar  meu pc&#8230; Estou tentando continuar o projeto mas não está dando&#8230; quando dou o comando git push origin master ele retorna &#8220;Permission denied (publickey).<br />
+fatal: The remote end hung up unexpectedly&#8221;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-68">
+        <div id="dsq-comment-header-68" class="dsq-comment-header">
+            <cite id="dsq-cite-68">
+                <span id="dsq-author-user-68">Siya</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-68" class="dsq-comment-body">
+            <div id="dsq-comment-message-68" class="dsq-comment-message"><p>Eu não tenho palavras para apreciar este post &#8230;.. estou realmente impressionado&#8230;. a pessoa que criou este post certamente sabia bem o assunto .. obrigado por compartilhar isso conosco. <br />
+<a href="http://www.mp3fundoo.in/gali-gali-mein-chor-hai-songs-mp3-download.html" rel="nofollow">Gali Gali Chor Hai Songs</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-69">
+        <div id="dsq-comment-header-69" class="dsq-comment-header">
+            <cite id="dsq-cite-69">
+                <span id="dsq-author-user-69">Simar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-69" class="dsq-comment-body">
+            <div id="dsq-comment-message-69" class="dsq-comment-message"><p>Eu estava na necessidade real de tal site.I um estou muito ajudado por este sitecomo eu sempre recebo here.Thanks post de inspiração e de instrução para tomar o tempo para conversar tudo de tal maneira ao longo this.Go.<br />
+<a href="http://www.mp3fundoo.in/jodi-breakers-songs-free-mp3-download.html" rel="nofollow">Jodi Breakers Songs</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://compiladao.wordpress.com/2012/02/02/criando-e-usando-um-repositorio-git/' rel='external nofollow' class='url fn n' itemprop="url"><span itemprop="name">Criando e usando um repositório Git &laquo; Compiladão de dicas</span></a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-76">
+        <div id="dsq-comment-header-76" class="dsq-comment-header">
+            <cite id="dsq-cite-76">
+                <span id="dsq-author-user-76">Diego Souza</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-76" class="dsq-comment-body">
+            <div id="dsq-comment-message-76" class="dsq-comment-message"><p>Obrigado! me ajudou a descomplicar o Git/Github</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-77">
+        <div id="dsq-comment-header-77" class="dsq-comment-header">
+            <cite id="dsq-cite-77">
+                <span id="dsq-author-user-77">Felipe Duarte</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-77" class="dsq-comment-body">
+            <div id="dsq-comment-message-77" class="dsq-comment-message"><p>Prezado(a),</p>
+<p>    Muito bom este artigo meu ajudou bastante.. </p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-78">
+        <div id="dsq-comment-header-78" class="dsq-comment-header">
+            <cite id="dsq-cite-78">
+                <a id="dsq-author-user-78" href="http://www.facebook.com/richieri" target="_blank" rel="nofollow">Ronaldo Richieri</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-78" class="dsq-comment-body">
+            <div id="dsq-comment-message-78" class="dsq-comment-message"><p>Olá! Muito fera teu tutorial! Grato! e Parabéns! </p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-83">
+        <div id="dsq-comment-header-83" class="dsq-comment-header">
+            <cite id="dsq-cite-83">
+                <a id="dsq-author-user-83" href="http://twitter.com/heliob" target="_blank" rel="nofollow">Hélio Barbosa</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-83" class="dsq-comment-body">
+            <div id="dsq-comment-message-83" class="dsq-comment-message"><p>pra cada projeto (php, java, whatever) que eu crio eu tenho que criar um repositório? <br />
+Com subversion eu tenho um repositório só e quando preciso mexer em um projeto só baixo o diretório daquele projeto, há algo parecido no git ou tenho que clonar o repositório inteiro?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-codexico bypostauthor even depth-2 role-editor" id="dsq-comment-84">
+        <div id="dsq-comment-header-84" class="dsq-comment-header">
+            <cite id="dsq-cite-84">
+                <a id="dsq-author-user-84" href="http://codexico.com.br" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-84" class="dsq-comment-body">
+            <div id="dsq-comment-message-84" class="dsq-comment-message"><p>Hélio, para trabalhar dessa maneira teria que clonar o repositório todo mesmo. Mas é fácil criar novos repositórios e tem a vantagem de que se der algum problema, algo que ocorre menos no git do que no svn, o problema ocorre em um só.<br />
+Com  um repositório para cada projeto  pode-se por exemplo usar um gitignore diferente para os projetos em php e java, também o repositório não fica tão grande se for separado e se você estiver em um computador diferente é só clonar o projeto que quiser.<br />
+O processo de deploy fica facilitado se  usar um repositório para cada projeto, você pode configurar por exemplo para enviar os arquivos ao servidor de testes ou ao de produção automaticamente dependendo de qual branch estiver usando.<br />
+Só vejo vantagens em usar um repositório para cada projeto.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt depth-2" id="dsq-comment-85">
+        <div id="dsq-comment-header-85" class="dsq-comment-header">
+            <cite id="dsq-cite-85">
+                <a id="dsq-author-user-85" href="http://codexico.com.br/" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-85" class="dsq-comment-body">
+            <div id="dsq-comment-message-85" class="dsq-comment-message"><p> Hélio, para trabalhar dessa maneira teria que clonar o repositório todo mesmo. Mas é fácil criar novos repositórios e tem a vantagem de que se der algum problema, algo que ocorre menos no git do que no svn, o problema ocorre em um só.<br />
+Com  um repositório para cada projeto  pode-se por exemplo usar um gitignore diferente para os projetos em php e java, também o repositório não fica tão grande se for separado e se você estiver em um computador diferente é só clonar o projeto que quiser.<br />
+O processo de deploy fica facilitado se  usar um repositório para cada projeto, você pode configurar por exemplo para enviar os arquivos ao servidor de testes ou ao de produção automaticamente dependendo de qual branch estiver usando.<br />
+Só vejo vantagens em usar um repositório para cada projeto.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-86">
+        <div id="dsq-comment-header-86" class="dsq-comment-header">
+            <cite id="dsq-cite-86">
+                <span id="dsq-author-user-86">robmachado</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-86" class="dsq-comment-body">
+            <div id="dsq-comment-message-86" class="dsq-comment-message"><p>Muito, mas muito útil mesmo !!! me ajudou bastante &#8230; um excelente mini tutorial.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-88">
+        <div id="dsq-comment-header-88" class="dsq-comment-header">
+            <cite id="dsq-cite-88">
+                <span id="dsq-author-user-88">Vanderson</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-88" class="dsq-comment-body">
+            <div id="dsq-comment-message-88" class="dsq-comment-message"><p>Cara muito bom o tuto aqui em, me ensinou bastante. Vaelu!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-93">
+        <div id="dsq-comment-header-93" class="dsq-comment-header">
+            <cite id="dsq-cite-93">
+                <a id="dsq-author-user-93" href="http://twitter.com/renatotavares" target="_blank" rel="nofollow">Renato Tavares</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-93" class="dsq-comment-body">
+            <div id="dsq-comment-message-93" class="dsq-comment-message"><p>Minha dúvida pode ser boba porém acho válida, quando estou construindo um sistema sozinho e do zero, usar GIT é uma boa pedida? estou testando aqui porém acho que ele ta me deixando pouco produtivo pois sempre tenho que alterar arquivos e corrigir bugs e construir coisas. gosto do git porém ele não seria melhor para controlar um sistema depois que ele sai do desenvolvimento? ja ganha sua primeira TAG e por ai adiante?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-94">
+        <div id="dsq-comment-header-94" class="dsq-comment-header">
+            <cite id="dsq-cite-94">
+                <a id="dsq-author-user-94" href="http://codexico.com.br/" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-94" class="dsq-comment-body">
+            <div id="dsq-comment-message-94" class="dsq-comment-message"><p>É Renato, muitas vezes a gente vai desenvolvendo sozinho e do zero, fazendo partes meio aleatórias do projeto, naquela fase em que na verdade a gente tá criando mesmo algo, tem muita coisa que a gente vai colocando e tirando no código muito rápido, a gente tá fazendo uma parte e descobre que precisava fazer outra antes e por aí vai, pode ser um pouco mais ágil fazer commits mais esparsos.</p>
+<p>Como vc disse, depois que o projeto estiver mais consistente aí dá pra controlar melhor.<br />
+Nesse caso acho que a melhor regra seria &#8220;fiz algo importante que vale a pena perder algum tempinho para commitar e explicar?&#8221;.</p>
+<p>O git vai melhor quando a gente usa alguma metodologia tipo scrum ou algo assim onde a gente divide as tarefas.<br />
+Eu gosto das metodologias ágeis, mesmo quando estou fazendo algo sozinho e do zero. Na verdade eu uso pra mim mesmo GTD + pomodoro, o GTD para dividir as tarefas e o pomodoro para controlar a execução, assim eu paro de tempos em tempos para rever e que fiz e aproveito e dou um git.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-99">
+        <div id="dsq-comment-header-99" class="dsq-comment-header">
+            <cite id="dsq-cite-99">
+                <a id="dsq-author-user-99" href="http://twitter.com/renatotavares" target="_blank" rel="nofollow">Renato Tavares</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-99" class="dsq-comment-body">
+            <div id="dsq-comment-message-99" class="dsq-comment-message"><p>Obrigado pela resposta. Outra vez parabéns</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-100">
+        <div id="dsq-comment-header-100" class="dsq-comment-header">
+            <cite id="dsq-cite-100">
+                <span id="dsq-author-user-100">Lorena Adrian</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-100" class="dsq-comment-body">
+            <div id="dsq-comment-message-100" class="dsq-comment-message"><p>Dúvida: como faço para dar &#8220;check out&#8221; quando estou trabalhando com 1 solução &#8211; ou seja, tenho 1 projeto de software, vários usuários acessando esse repositório e preciso dar checkout para que outro não consiga alterar enquanto estou mexendo???</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-102">
+        <div id="dsq-comment-header-102" class="dsq-comment-header">
+            <cite id="dsq-cite-102">
+                <a id="dsq-author-user-102" href="http://codexico.com.br/" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-102" class="dsq-comment-body">
+            <div id="dsq-comment-message-102" class="dsq-comment-message"><p>O git não tem um needs-lock como no svn, a ideia é essa mesma, ser um sistema distribuído em que todos podem trabalhar offline e os conflitos sejam resolvidos no merge.</p>
+<p>Uma opção é ter um repositório central onde você pode controlar os merges, então cada desenvolvedor manda para um branch e você decide se aquela alteração entra no repositório central, como um pull-request.</p>
+<p>Quem sabe algo como a opção core.sharedRepository pode ajudar também.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-105">
+        <div id="dsq-comment-header-105" class="dsq-comment-header">
+            <cite id="dsq-cite-105">
+                <span id="dsq-author-user-105">Daniel Albino</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-105" class="dsq-comment-body">
+            <div id="dsq-comment-message-105" class="dsq-comment-message"><p>Vlw bróder!!!<br />
+Estava patinando pra configurar essa parada, mas com seu tutorial eu consegui.<br />
+[]&#8217;s</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-107">
+        <div id="dsq-comment-header-107" class="dsq-comment-header">
+            <cite id="dsq-cite-107">
+                <span id="dsq-author-user-107">Marcelo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-107" class="dsq-comment-body">
+            <div id="dsq-comment-message-107" class="dsq-comment-message"><p>Valeu! Ajudou bastante,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-110">
+        <div id="dsq-comment-header-110" class="dsq-comment-header">
+            <cite id="dsq-cite-110">
+                <span id="dsq-author-user-110">Rafael Freitas</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-110" class="dsq-comment-body">
+            <div id="dsq-comment-message-110" class="dsq-comment-message"><p>Seu tutorial foi de grande utilidade para mim, muito obrigado!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-111">
+        <div id="dsq-comment-header-111" class="dsq-comment-header">
+            <cite id="dsq-cite-111">
+                <span id="dsq-author-user-111">Fabiano Maximiano</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-111" class="dsq-comment-body">
+            <div id="dsq-comment-message-111" class="dsq-comment-message"><p>Parabens pelo tutorial, estava levando um coro e nao sabia nem por onde começar a utilizar o GIT.<br />
+Agora vou deixar de ser junior!!!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-112">
+        <div id="dsq-comment-header-112" class="dsq-comment-header">
+            <cite id="dsq-cite-112">
+                <span id="dsq-author-user-112">Henrique Souza</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-112" class="dsq-comment-body">
+            <div id="dsq-comment-message-112" class="dsq-comment-message"><p>Muito bom artigo! Agora.. fiquei com uma dúvida: como faço para apagar os arquivos e diretórios do GitHub via Git?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-113">
+        <div id="dsq-comment-header-113" class="dsq-comment-header">
+            <cite id="dsq-cite-113">
+                <span id="dsq-author-user-113">Gabriel Darezzo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-113" class="dsq-comment-body">
+            <div id="dsq-comment-message-113" class="dsq-comment-message"><p>Legal segui seu tutu e foi certinho</p>
+<p>Tive problemas só pra gerar ssh<br />
+Peguei mais info no oficial:<br />
+<a href="https://help.github.com/articles/generating-ssh-keys" rel="nofollow">https://help.github.com/articles/generating-ssh-keys</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-115">
+        <div id="dsq-comment-header-115" class="dsq-comment-header">
+            <cite id="dsq-cite-115">
+                <span id="dsq-author-user-115">Cléber Otaviano</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-115" class="dsq-comment-body">
+            <div id="dsq-comment-message-115" class="dsq-comment-message"><p>Sensacional!!!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-116">
+        <div id="dsq-comment-header-116" class="dsq-comment-header">
+            <cite id="dsq-cite-116">
+                <span id="dsq-author-user-116">Danilo Agostinho</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-116" class="dsq-comment-body">
+            <div id="dsq-comment-message-116" class="dsq-comment-message"><p>Boas dica, apenas precisam serem atualizadas. O post foi publicado em 2010, mais ainda dá pra seguir direitinho.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-117">
+        <div id="dsq-comment-header-117" class="dsq-comment-header">
+            <cite id="dsq-cite-117">
+                <a id="dsq-author-user-117" href="http://cerebrovasconcelos.tumblr.com/" target="_blank" rel="nofollow">Cerebro Vasconcelos</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-117" class="dsq-comment-body">
+            <div id="dsq-comment-message-117" class="dsq-comment-message"><p>o meu ta dando erro, não consigo commitar, num tem uma parte de uma parte de configuração de token</p>
+<p>git config &#8211;global github.token your_token</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-118">
+        <div id="dsq-comment-header-118" class="dsq-comment-header">
+            <cite id="dsq-cite-118">
+                <span id="dsq-author-user-118">Caio Cutrim</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-118" class="dsq-comment-body">
+            <div id="dsq-comment-message-118" class="dsq-comment-message"><p>valeu brother :)</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-120">
+        <div id="dsq-comment-header-120" class="dsq-comment-header">
+            <cite id="dsq-cite-120">
+                <span id="dsq-author-user-120">Cornélio José Wiedemann</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-120" class="dsq-comment-body">
+            <div id="dsq-comment-message-120" class="dsq-comment-message"><p>amazing brow<br />
+valeu ai negrao<br />
+curti pacas<br />
+:D</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-123">
+        <div id="dsq-comment-header-123" class="dsq-comment-header">
+            <cite id="dsq-cite-123">
+                <span id="dsq-author-user-123">Jones</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-123" class="dsq-comment-body">
+            <div id="dsq-comment-message-123" class="dsq-comment-message"><p>rapaz nem sei por onde começar, não entendi nada! =/</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-124">
+        <div id="dsq-comment-header-124" class="dsq-comment-header">
+            <cite id="dsq-cite-124">
+                <span id="dsq-author-user-124">Jonatan Alves</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-124" class="dsq-comment-body">
+            <div id="dsq-comment-message-124" class="dsq-comment-message"><p>Pessoal ,  vocês conhecem uma forma de pesquisar projetos do github e retornar  com download todos os projetos de uma vez ?  Por  exemplo  na api do git (<a href="https://api.github.com/search/repositories?q=forks:20+language:java&#038;sort=stars&#038;order=desc" rel="nofollow">https://api.github.com/search/repositories?q=forks:20+language:java&#038;sort=stars&#038;order=desc</a>) consigo retornar todos os projetos em java , com maiores estrelas e  com 20 forks . mas não consigo fazer download desses projetos encontrados . Não é trivial  fazer o download de um por um , seria necessário download em lote , sei ainda que o git  bloqueia  20 downloads de projetos por minuto , mas não sei como fazer estes download em lote . Alguém conhece um script que faça isso ou tem alguma ideia  ? Obrigado !</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-127">
+        <div id="dsq-comment-header-127" class="dsq-comment-header">
+            <cite id="dsq-cite-127">
+                <span id="dsq-author-user-127">kndrio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-127" class="dsq-comment-body">
+            <div id="dsq-comment-message-127" class="dsq-comment-message"><p>Faz um script dando git clone dos projetos que você encontrou.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-133">
+        <div id="dsq-comment-header-133" class="dsq-comment-header">
+            <cite id="dsq-cite-133">
+                <span id="dsq-author-user-133">husmeck</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-133" class="dsq-comment-body">
+            <div id="dsq-comment-message-133" class="dsq-comment-message"><p>$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:codexico/tutorial-github.git</p>
+<p>eu tentei usando esses passos mas n vejo nada no meu github</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-134">
+        <div id="dsq-comment-header-134" class="dsq-comment-header">
+            <cite id="dsq-cite-134">
+                <span id="dsq-author-user-134">Renoir Faria</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-134" class="dsq-comment-body">
+            <div id="dsq-comment-message-134" class="dsq-comment-message"><p>Olá, excelente tutorial!!</p>
+<p>btw, qual é o plugin que você usa para mostrar códigos?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-138">
+        <div id="dsq-comment-header-138" class="dsq-comment-header">
+            <cite id="dsq-cite-138">
+                <a id="dsq-author-user-138" href="http://codexico.com.br/" target="_blank" rel="nofollow">codexico</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-138" class="dsq-comment-body">
+            <div id="dsq-comment-message-138" class="dsq-comment-message"><p>O plugin é esse: <a href="https://wordpress.org/plugins/codecolorer/" rel="nofollow">https://wordpress.org/plugins/codecolorer/</a><br />
+Ainda bem que perguntou, fui olhar e está sem atualizações faz 2 anos, talvez seja hora de mudar, apareceram alguns problemas já, em outro post cortou um pouquinho do código.<br />
+Valeu!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-135">
+        <div id="dsq-comment-header-135" class="dsq-comment-header">
+            <cite id="dsq-cite-135">
+                <a id="dsq-author-user-135" href="https://crislaniomacedo.zz.vc" target="_blank" rel="nofollow">CRISLANIO</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-135" class="dsq-comment-body">
+            <div id="dsq-comment-message-135" class="dsq-comment-message"><p>Muito Bom !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-142">
+        <div id="dsq-comment-header-142" class="dsq-comment-header">
+            <cite id="dsq-cite-142">
+                <span id="dsq-author-user-142">Yuri Morales</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-142" class="dsq-comment-body">
+            <div id="dsq-comment-message-142" class="dsq-comment-message"><p>Muito bom o tutorial, simples e objetivo!<br />
+Parabéns pela iniciativa, valeu por compartilhar.</p>
+<p>Abraço!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-143">
+        <div id="dsq-comment-header-143" class="dsq-comment-header">
+            <cite id="dsq-cite-143">
+                <span id="dsq-author-user-143">Claudio Shigemi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-143" class="dsq-comment-body">
+            <div id="dsq-comment-message-143" class="dsq-comment-message"><p>como faço para sair de repositório que apenas estou contribuindo ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+var disqus_url = 'http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/';
+var disqus_identifier = '34 http://codexico.com.br/blog/?p=34';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'codexico';
+var disqus_title = "Tutorial simples: Como usar o git e o github";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=34';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+			
+		
+		
+	<div class="loop-nav">
+		<div class="prev">Publicação anterior: <a href="http://codexico.com.br/blog/linux/apt-get-install-todos-os-compactadores-e-descompactadores-no-linux/" rel="prev">apt-get install todos os compactadores e descompactadores no linux</a></div>		<div class="next">Próxima publicação: <a href="http://codexico.com.br/blog/linux/como-scannear-e-editar-imagem-no-kubuntu-10-04/" rel="next">Como scannear e editar imagem no kubuntu 10.04</a></div>	</div><!-- .loop-nav -->
+
+
+	
+</main><!-- #content -->
+
+				
+			</div><!-- #main -->
+
+			
+	<aside class="sidebar sidebar-subsidiary sidebar-col-3" role="complementary" id="sidebar-subsidiary" aria-label="Auxiliar Barra lateral" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+
+				<section id="recent-posts-4" class="widget widget_recent_entries">		<h3 class="widget-title">Tópicos recentes</h3>		<ul>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/como-dar-acesso-ftp-ao-seu-designer-na-digitalocean/">Como dar acesso ftp ao seu designer na DigitalOcean</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/o-basico-de-ssh-e-mais-algumas-dicas/">O básico de ssh e mais algumas dicas</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/dominio/como-mover-dominio-br-para-o-registro-br/">Como mover domínio .br para o registro.br</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/jquery/exemplos-de-jquery-when/">Exemplos de $.when()</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/jquery/diy-slideshow-em-jquery/">DIY &#8211; slideshow em jQuery</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/tutorial-simples-parte-2-git-branch-e-merge/">Tutorial simples parte 2: git branch e merge</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/html5/tutorial-simples-formas-basicas-do-canvas-no-html5/">Tutorial simples: Formas básicas do canvas no html5</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/twitter/simbolos-para-usar-no-twitter/">Símbolos para usar no twitter</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/copiar-ou-clonar-uma-vm-no-virtualbox-e-facil/">Copiar ou clonar uma VM no VirtualBox é fácil</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/projetos/porque-fiz-o-ttlocal/">Por que fiz o http://ttlocal.info</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/como-instalar-rails-3-no-kubuntu-10-04/">Como instalar Rails 3 no (k) ubuntu</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/windows/como-instalar-varios-programas-de-uma-so-vez-no-windows/">Como instalar vários programas de uma só vez no Windows</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/como-scannear-e-editar-imagem-no-kubuntu-10-04/">Como scannear e editar imagem no kubuntu 10.04</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/">Tutorial simples: Como usar o git e o github</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/linux/apt-get-install-todos-os-compactadores-e-descompactadores-no-linux/">apt-get install todos os compactadores e descompactadores no linux</a>
+						</li>
+					<li>
+				<a href="http://codexico.com.br/blog/css/css-layout-vertical-center-align/">css layout vertical center align</a>
+						</li>
+				</ul>
+		</section>		<section id="categories-4" class="widget widget_categories"><h3 class="widget-title">Categorias</h3>		<ul>
+	<li class="cat-item cat-item-3"><a href="http://codexico.com.br/blog/category/css/" >css</a> (1)
+</li>
+	<li class="cat-item cat-item-52"><a href="http://codexico.com.br/blog/category/dominio/" >domínio</a> (1)
+</li>
+	<li class="cat-item cat-item-47"><a href="http://codexico.com.br/blog/category/git/" >git</a> (2)
+</li>
+	<li class="cat-item cat-item-32"><a href="http://codexico.com.br/blog/category/html5/" >html5</a> (1)
+</li>
+	<li class="cat-item cat-item-41"><a href="http://codexico.com.br/blog/category/javascript/" >javascript</a> (1)
+</li>
+	<li class="cat-item cat-item-37"><a href="http://codexico.com.br/blog/category/jquery/" >jQuery</a> (2)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://codexico.com.br/blog/category/linux/" >linux</a> (8)
+</li>
+	<li class="cat-item cat-item-28"><a href="http://codexico.com.br/blog/category/projetos/" >projetos</a> (1)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://codexico.com.br/blog/category/rails/" >rails</a> (1)
+</li>
+	<li class="cat-item cat-item-46"><a href="http://codexico.com.br/blog/category/twitter/" >twitter</a> (2)
+</li>
+	<li class="cat-item cat-item-31"><a href="http://codexico.com.br/blog/category/virtualizacao/" >virtualização</a> (1)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://codexico.com.br/blog/category/windows/" >windows</a> (1)
+</li>
+		</ul>
+</section><section id="text-6" class="widget widget_text"><h3 class="widget-title">Já testou o Uber?</h3>			<div class="textwidget"><p>Eu testei e gostei! Achei super prático, tanto quanto o 99táxis, mas os carros são melhores e os motoristas bem mais educados que os taxistas.<br />
+Se vc quiser testar acesse<br />
+<a href="https://www.uber.com/invite/ubercodexico">https://www.uber.com/invite/ubercodexico</a><br />
+e ganhe R$20,00 de desconto na primeira viagem!<br />
+E eu também ganho vintão de desconto ;)<br />
+Ou use o código ubercodexico<br />
+Boa viagem!</p>
+</div>
+		</section><section id="tag_cloud-4" class="widget widget_tag_cloud"><h3 class="widget-title">Tags</h3><div class="tagcloud"><a href='http://codexico.com.br/blog/tag/10-04/' class='tag-link-24 tag-link-position-1' title='1 tópico' style='font-size: 8pt;'>10.04</a>
+<a href='http://codexico.com.br/blog/tag/ajax/' class='tag-link-43 tag-link-position-2' title='1 tópico' style='font-size: 8pt;'>ajax</a>
+<a href='http://codexico.com.br/blog/tag/apps/' class='tag-link-15 tag-link-position-3' title='1 tópico' style='font-size: 8pt;'>apps</a>
+<a href='http://codexico.com.br/blog/tag/apt-get/' class='tag-link-26 tag-link-position-4' title='1 tópico' style='font-size: 8pt;'>apt-get</a>
+<a href='http://codexico.com.br/blog/tag/apt-get-linux-zip-rar/' class='tag-link-7 tag-link-position-5' title='1 tópico' style='font-size: 8pt;'>apt-get linux zip rar</a>
+<a href='http://codexico.com.br/blog/tag/async/' class='tag-link-42 tag-link-position-6' title='1 tópico' style='font-size: 8pt;'>async</a>
+<a href='http://codexico.com.br/blog/tag/canvas/' class='tag-link-34 tag-link-position-7' title='1 tópico' style='font-size: 8pt;'>canvas</a>
+<a href='http://codexico.com.br/blog/tag/css/' class='tag-link-45 tag-link-position-8' title='1 tópico' style='font-size: 8pt;'>css</a>
+<a href='http://codexico.com.br/blog/tag/deferreds/' class='tag-link-44 tag-link-position-9' title='1 tópico' style='font-size: 8pt;'>deferreds</a>
+<a href='http://codexico.com.br/blog/tag/dicas/' class='tag-link-60 tag-link-position-10' title='1 tópico' style='font-size: 8pt;'>dicas</a>
+<a href='http://codexico.com.br/blog/tag/diy/' class='tag-link-40 tag-link-position-11' title='1 tópico' style='font-size: 8pt;'>diy</a>
+<a href='http://codexico.com.br/blog/tag/dominio/' class='tag-link-55 tag-link-position-12' title='1 tópico' style='font-size: 8pt;'>domínio</a>
+<a href='http://codexico.com.br/blog/tag/downloads/' class='tag-link-16 tag-link-position-13' title='1 tópico' style='font-size: 8pt;'>downloads</a>
+<a href='http://codexico.com.br/blog/tag/free/' class='tag-link-18 tag-link-position-14' title='1 tópico' style='font-size: 8pt;'>free</a>
+<a href='http://codexico.com.br/blog/tag/gimp/' class='tag-link-11 tag-link-position-15' title='1 tópico' style='font-size: 8pt;'>gimp</a>
+<a href='http://codexico.com.br/blog/tag/git/' class='tag-link-8 tag-link-position-16' title='3 tópicos' style='font-size: 22pt;'>git</a>
+<a href='http://codexico.com.br/blog/tag/github/' class='tag-link-9 tag-link-position-17' title='2 tópicos' style='font-size: 16.4pt;'>github</a>
+<a href='http://codexico.com.br/blog/tag/hospedagem/' class='tag-link-53 tag-link-position-18' title='1 tópico' style='font-size: 8pt;'>hospedagem</a>
+<a href='http://codexico.com.br/blog/tag/html5/' class='tag-link-48 tag-link-position-19' title='2 tópicos' style='font-size: 16.4pt;'>html5</a>
+<a href='http://codexico.com.br/blog/tag/html5-canvas-png/' class='tag-link-33 tag-link-position-20' title='1 tópico' style='font-size: 8pt;'>html5 canvas png</a>
+<a href='http://codexico.com.br/blog/tag/install/' class='tag-link-17 tag-link-position-21' title='2 tópicos' style='font-size: 16.4pt;'>install</a>
+<a href='http://codexico.com.br/blog/tag/javascript/' class='tag-link-51 tag-link-position-22' title='1 tópico' style='font-size: 8pt;'>javascript</a>
+<a href='http://codexico.com.br/blog/tag/jquery/' class='tag-link-50 tag-link-position-23' title='2 tópicos' style='font-size: 16.4pt;'>jQuery</a>
+<a href='http://codexico.com.br/blog/tag/kubuntu/' class='tag-link-10 tag-link-position-24' title='2 tópicos' style='font-size: 16.4pt;'>kubuntu</a>
+<a href='http://codexico.com.br/blog/tag/layout/' class='tag-link-4 tag-link-position-25' title='1 tópico' style='font-size: 8pt;'>layout</a>
+<a href='http://codexico.com.br/blog/tag/linux/' class='tag-link-49 tag-link-position-26' title='3 tópicos' style='font-size: 22pt;'>linux</a>
+<a href='http://codexico.com.br/blog/tag/listas/' class='tag-link-14 tag-link-position-27' title='1 tópico' style='font-size: 8pt;'>listas</a>
+<a href='http://codexico.com.br/blog/tag/plugin/' class='tag-link-38 tag-link-position-28' title='1 tópico' style='font-size: 8pt;'>plugin</a>
+<a href='http://codexico.com.br/blog/tag/png/' class='tag-link-35 tag-link-position-29' title='1 tópico' style='font-size: 8pt;'>png</a>
+<a href='http://codexico.com.br/blog/tag/provedor/' class='tag-link-54 tag-link-position-30' title='1 tópico' style='font-size: 8pt;'>provedor</a>
+<a href='http://codexico.com.br/blog/tag/rails3/' class='tag-link-23 tag-link-position-31' title='1 tópico' style='font-size: 8pt;'>rails3</a>
+<a href='http://codexico.com.br/blog/tag/registro/' class='tag-link-57 tag-link-position-32' title='1 tópico' style='font-size: 8pt;'>registro</a>
+<a href='http://codexico.com.br/blog/tag/ror/' class='tag-link-22 tag-link-position-33' title='1 tópico' style='font-size: 8pt;'>ror</a>
+<a href='http://codexico.com.br/blog/tag/ruby/' class='tag-link-21 tag-link-position-34' title='1 tópico' style='font-size: 8pt;'>ruby</a>
+<a href='http://codexico.com.br/blog/tag/rubygems/' class='tag-link-25 tag-link-position-35' title='1 tópico' style='font-size: 8pt;'>rubygems</a>
+<a href='http://codexico.com.br/blog/tag/scanner/' class='tag-link-12 tag-link-position-36' title='1 tópico' style='font-size: 8pt;'>scanner</a>
+<a href='http://codexico.com.br/blog/tag/shell/' class='tag-link-58 tag-link-position-37' title='1 tópico' style='font-size: 8pt;'>shell</a>
+<a href='http://codexico.com.br/blog/tag/slideshow/' class='tag-link-39 tag-link-position-38' title='1 tópico' style='font-size: 8pt;'>slideshow</a>
+<a href='http://codexico.com.br/blog/tag/ssh/' class='tag-link-59 tag-link-position-39' title='2 tópicos' style='font-size: 16.4pt;'>ssh</a>
+<a href='http://codexico.com.br/blog/tag/trending-topics/' class='tag-link-30 tag-link-position-40' title='1 tópico' style='font-size: 8pt;'>trending topics</a>
+<a href='http://codexico.com.br/blog/tag/tt/' class='tag-link-29 tag-link-position-41' title='1 tópico' style='font-size: 8pt;'>tt</a>
+<a href='http://codexico.com.br/blog/tag/tutorial/' class='tag-link-36 tag-link-position-42' title='3 tópicos' style='font-size: 22pt;'>tutorial</a>
+<a href='http://codexico.com.br/blog/tag/twitter/' class='tag-link-5 tag-link-position-43' title='1 tópico' style='font-size: 8pt;'>twitter</a>
+<a href='http://codexico.com.br/blog/tag/ubuntu/' class='tag-link-20 tag-link-position-44' title='1 tópico' style='font-size: 8pt;'>ubuntu</a>
+<a href='http://codexico.com.br/blog/tag/uolhost/' class='tag-link-56 tag-link-position-45' title='1 tópico' style='font-size: 8pt;'>uolhost</a></div>
+</section><section id="blog_subscription-5" class="widget jetpack_subscription_widget"><h3 class="widget-title">Assinar blog por e-mail</h3>
+			<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-5">
+				<div id="subscribe-text"><p>Digite seu endereço de e-mail para assinar este blog e receber notificações de novas publicações por e-mail.</p>
+</div>					<p id="subscribe-email">
+						<label id="jetpack-subscribe-label" for="subscribe-field-blog_subscription-5">
+							Endereço de e-mail						</label>
+						<input type="email" name="email" required="required" class="required" value="" id="subscribe-field-blog_subscription-5" placeholder="Endereço de e-mail" />
+					</p>
+
+					<p id="subscribe-submit">
+						<input type="hidden" name="action" value="subscribe" />
+						<input type="hidden" name="source" value="http://codexico.com.br/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" />
+						<input type="hidden" name="sub-type" value="widget" />
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-5" />
+												<input type="submit" value="Assinar" name="jetpack_subscriptions_widget" />
+					</p>
+							</form>
+
+			<script>
+			/*
+			Custom functionality for safari and IE
+			 */
+			(function( d ) {
+				// In case the placeholder functionality is available we remove labels
+				if ( ( 'placeholder' in d.createElement( 'input' ) ) ) {
+					var label = d.querySelector( 'label[for=subscribe-field-blog_subscription-5]' );
+						label.style.clip 	 = 'rect(1px, 1px, 1px, 1px)';
+						label.style.position = 'absolute';
+						label.style.height   = '1px';
+						label.style.width    = '1px';
+						label.style.overflow = 'hidden';
+				}
+
+				// Make sure the email value is filled in before allowing submit
+				var form = d.getElementById('subscribe-blog-blog_subscription-5'),
+					input = d.getElementById('subscribe-field-blog_subscription-5'),
+					handler = function( event ) {
+						if ( '' === input.value ) {
+							input.focus();
+
+							if ( event.preventDefault ){
+								event.preventDefault();
+							}
+
+							return false;
+						}
+					};
+
+				if ( window.addEventListener ) {
+					form.addEventListener( 'submit', handler, false );
+				} else {
+					form.attachEvent( 'onsubmit', handler );
+				}
+			})( document );
+			</script>
+				
+</section><section id="search-4" class="widget widget_search"><form role="search" method="get" class="search-form" action="http://codexico.com.br/blog/">
+				<label>
+					<span class="screen-reader-text">Pesquisar por:</span>
+					<input type="search" class="search-field" placeholder="Pesquisar &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Pesquisar" />
+			</form></section>
+	</aside><!-- #sidebar-subsidiary -->
+
+
+		</div><!-- .wrap -->
+
+		<footer id="footer" class="site-footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+
+			<div class="wrap">
+
+				
+				<p class="credit">
+					Direitos autorais &#169; 2017 <a class="site-link" href="http://codexico.com.br/blog" rel="home">codexico</a>. Desenvolvido por <a class="wp-link" href="http://wordpress.org">WordPress</a> and <a class="theme-link" href="http://themehybrid.com/themes/stargazer">Stargazer</a>.				</p><!-- .credit -->
+
+			</div><!-- .wrap -->
+
+		</footer><!-- #footer -->
+
+	</div><!-- #container -->
+
+	        <script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'codexico';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1 && nodes[i].parentNode.tagName == 'A') {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+        	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/codexico.com.br\/blog\/linux\/tutorial-simples-como-usar-o-git-e-o-github\/":34};
+	</script>
+	<div id="sharing_email" style="display: none;">
+		<form action="/blog/linux/tutorial-simples-como-usar-o-git-e-o-github/" method="post">
+			<label for="target_email">Enviar para o Endereço de Email</label>
+			<input type="email" name="target_email" id="target_email" value="" />
+
+			
+				<label for="source_name">Seu Nome</label>
+				<input type="text" name="source_name" id="source_name" value="" />
+
+				<label for="source_email">Seu Endereço de Email</label>
+				<input type="email" name="source_email" id="source_email" value="" />
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off" />
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			
+			<img style="float: right; display: none" class="loading" src="http://codexico.com.br/blog/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16" />
+			<input type="submit" value="Enviar Email" class="sharing_send" />
+			<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancelar</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post não foi enviado - verifique os seus endereços de email!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Verificação de email falhou, por favor, tente novamente			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Desculpe, seu blog não pode compartilhar posts por email.			</div>
+		</form>
+	</div>
+<div id="fb-root"></div>
+			<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+			<script>
+			jQuery( document.body ).on( 'post-load', function() {
+				if ( 'undefined' !== typeof FB ) {
+					FB.XFBML.parse();
+				}
+			} );
+			</script>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						<script>
+			function renderGooglePlus1() {
+				if ( 'undefined' === typeof gapi ) {
+					return;
+				}
+
+				jQuery( '.g-plus' ).each(function() {
+					var $button = jQuery( this );
+
+					if ( ! $button.data( 'gplus-rendered' ) ) {
+						gapi.plusone.render( this, {
+							href: $button.attr( 'data-href' ),
+							size: $button.attr( 'data-size' ),
+							annotation: $button.attr( 'data-annotation' )
+						});
+
+						$button.data( 'gplus-rendered', true );
+					}
+				});
+			}
+
+			(function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/plusone.js';
+				po.innerHTML = '{"parsetags": "explicit"}';
+				po.onload = renderGooglePlus1;
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			})();
+
+			jQuery( document.body ).on( 'post-load', renderGooglePlus1 );
+			</script>
+			<script type="text/javascript">
+			jQuery( document ).ready( function() {
+			    jQuery.getScript( 'https://platform.linkedin.com/in.js?async=true', function success() {
+			        IN.init();
+			    });
+			});
+			jQuery( document.body ).on( 'post-load', function() {
+				if ( typeof IN != 'undefined' )
+					IN.parse();
+			});
+			</script><script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/jetpack/modules/photon/photon.js?ver=20130122'></script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201704'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2017Janaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.6.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var stargazer_i18n = {"search_toggle":"Expandir formul\u00e1rio de pesquisa"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-content/themes/stargazer/js/stargazer.min.js'></script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-includes/js/wp-embed.min.js?ver=4.6.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://codexico.com.br/blog/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=4.3.2'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script>
+<script type='text/javascript' src='http://stats.wp.com/e-201704.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.3.2',blog:'15546639',post:'34',tz:'-2',srv:'codexico.com.br'} ]);
+	_stq.push([ 'clickTrackerInit', '15546639', '34' ]);
+</script>
+
+</body>
+</html>
